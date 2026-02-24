@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#body_index {
+    background-image: url("../images/e14.png");
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+}
+
+#options {
+    color: white;
+    font-family: 'Bookman Old Style', sans-serif;
+    text-align: right;
+    margin: 20px;
+}
+
+#options a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+#message {
+    font-family: 'Bookman Old Style', sans-serif;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    padding: 10px;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#inside {
+    color: white;
+    text-align: center;
+    font-family: 'Bookman Old Style', sans-serif;
+    border: 3px solid white;
+    border-radius: 15px;
+    margin: 2% auto;
+    padding: 20px;
+    max-width: 400px;
+}
+
+#inside h3 {
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: cyan;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button a {
+    text-decoration: none;
+    color: black;
+}
+
+button:hover {
+    background-color: lightcyan;
+}
+

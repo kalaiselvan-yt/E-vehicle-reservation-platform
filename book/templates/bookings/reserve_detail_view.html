@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Detail</title>
+    <script src="https://kit.fontawesome.com/692189991f.js" crossorigin="anonymous"></script>
+
+    <!-- Main StyleSheet -->
+    <link rel="stylesheet" href="{% static 'css/reserve_detail_view.css' %}">
+
+</head>
+
+<body>  
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- reserve Image -->
+        <div class="image">
+            <img
+                src="/static/images/car.jpeg">
+        </div>
+
+        <!-- reserve Details -->
+        <div class="room">
+
+            <!-- Div 1: Back to Home -->
+            <div class="home">
+                <a href="{% url 'book:Reserve_list' %}"><i class="fas fa-arrow-alt-circle-left"></i>Home</a>
+            </div>
+
+            <!-- Div 2: reserve Information -->
+            <div class="room-info">
+                <h1>{{reserve_category}}</h1>   
+                <p>Level 1(Slow): The slowest charging level, which can take 22 - 40 hours to fully charge a battery electric vehicle (BEV). Level 1 chargers are suitable for home charging and overnight charging, and can provide 3–7 miles of range per hour of charging.<br><br>
+                    Level 2(Normal): A fast charging level, which is a good option for home charging and public charging stations.<br><br>          
+                    Level 3(Fast): A rapid charging level </p>
+            </div>
+
+            <!-- Div 3: reserve Booking Form -->
+            <form id="booking-form" action="" method="POST">
+
+                {% csrf_token %}
+
+                <!-- Input Div -->
+                <div class="input-div">
+                    <label for="id_check_in">Check In : </label>
+                    <input type="datetime-local" id="id_check_in" name="check_in">
+                </div>
+
+                <!-- Input Div -->
+                <div class="input-div">
+                    <label for="id_check_out">Check Out : </label>
+                    <input type="datetime-local" id="id_check_out" name="check_out">
+                </div>
+
+                <!-- Input Div -->
+                <div class="input-div">
+                    <button type="submit">Book Your charging Port</button>
+                </div>
+
+            </form>
+
+
+        </div> <!-- END reserve Div -->
+
+    </div> <!-- END Main Content Div -->
+
+</body>
+
+</html>

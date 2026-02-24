@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation list</title>
+    <!-- Main StyleSheet -->
+    <link rel="stylesheet" href="{% static 'css/reserve_list_view.css' %}">
+</head>
+
+<body>
+    <!-- Brand -->
+    <div class="content">
+        <h1 id="brand">Select your Slot</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        {% for reserve_category, reserve_url in reserve_list %}
+        <div class="room">
+            <a href="{{ reserve_url }}">
+                <img src="/static/images/car.jpeg">
+                <h2>{{ reserve_category }}</h2>
+                <p>SELECT WITH YOUR NEED OF CHARGING</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!-- locations.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/location.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ source }} to {{ destination }}: Ports You Have Connections With</title>
+    <style>
+        .highlight-red {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <div class="location-container">
+        {% if index|length == 1 %}
+            {% if index.0 >= max_distance %}
+                <h1>Your vehicle can travel  {{ index.0 }} kilometers with your charging capacity. No need to book with your charging capacity, you are ready to go!</h1>
+            {% else %}
+                <h1>Your vehicle can travel  {{ index.0 }} kilometers with your charging capacity. You need to book before red point highlights</h1>
+            {% endif %}
+        {% endif %}
+        <h1>{{ source }} to {{ destination }}: Ports You Have Connections With</h1>
+        
+        <table> 
+            <thead>
+                <tr>
+                    <th>Location Name</th>
+                    <th>Link for the location</th>
+                    <th>Distance (km)</th>
+                    <th>Book Here</th>  
+                </tr>
+            </thead>
+            <tbody>
+                {% for location, data in location_data.items %}
+                    <tr {% if index|length == 1 and index.0 < data.distance %} class="highlight-red" {% endif %}>
+                        <td><strong>{{ location }}</strong></td>
+                        <td><a href="{{ data.link }}" target="_blank">{{ data.link }}</a></td>
+                        <td>{{ data.distance }}</td>
+                        <td>
+                            <form action="{% url 'book_location' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="location" value="{{ location }}">
+                                <button type="submit">Book Here</button>
+                            </form> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

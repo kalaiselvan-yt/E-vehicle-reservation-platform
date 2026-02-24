@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+    <meta charset="UTF-8">
+    <title>E-Vehicle</title>
+</head>
+<body>
+    <header>
+        <h1>E-Vehicle</h1>
+    </header>
+    <section id="reservation">
+        {% if user.is_authenticated %}
+            <div>
+                <h1>Hello {{ fname }},  Welcome to E-Vehicle charging Portal</h1>
+                <form action="/signout" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Sign Out</button>
+                </form>
+                {% comment %} <label>To view your booking list</label>
+                <a href="/booking_list">Booking List</a> {% endcomment %}
+                <h2 class="center">Search for a nearby charging point location</h2>
+                <form action="{% url 'signin' %}" method="post">
+                    {% csrf_token %}
+                    <label for="destination" class="center">Select Your vehicle type</label>
+                    <select id="vehicle" name="vehicle">
+                        <optgroup label="Audi">
+                            <option value="Audi e-tron 55 quattro">Audi e-tron 55 quattro</option>
+                            <option value="Audi e-tron 50 quattro">Audi e-tron 50 quattro</option>
+                            <option value="Audi e-tron S quattro">Audi e-tron S quattro</option>
+                            <option value="Audi e-tron Sportback 50 quattro">Audi e-tron Sportback 50 quattro</option>
+                            <option value="Audi e-tron Sportback 55 quattro">Audi e-tron Sportback 55 quattro</option>
+                            <option value="Audi e-tron Sportback S quattro">Audi e-tron Sportback S quattro</option>
+                        </optgroup>
+                        
+                        <optgroup label="BMW">
+                            <option value="BMW i3">BMW i3</option>
+                            <option value="BMW i3s">BMW i3s</option>
+                            <option value="BMW iX3">BMW iX3</option>
+                        </optgroup>
+                        <optgroup label="Citroën">
+                            <option value="Citroën ë-C4">Citroën ë-C4</option>
+                        </optgroup>
+                        <optgroup label="DS">
+                            <option value="DS DS3 Crossback e-tense">DS DS3 Crossback e-tense</option>
+                        </optgroup>
+                        <optgroup label="Honda">
+                            <option value="Honda e">Honda e</option>
+                            <option value="Honda e Advance">Honda e Advance</option>
+                        </optgroup>
+                
+                        <!-- Add other manufacturers and their models similarly -->
+                        
+                        <optgroup label="Hyundai">
+                            <option value="Hyundai Ioniq electric">Hyundai Ioniq electric</option>
+                            <option value="Hyundai Kona electric 39.2kWh">Hyundai Kona electric 39.2kWh</option>
+                            <option value="Hyundai Kona electric 64kWh">Hyundai Kona electric 64kWh</option>
+                        </optgroup>
+                
+                        <optgroup label="Jaguar">
+                            <option value="Jaguar I-Pace">Jaguar I-Pace</option>
+                        </optgroup>
+                
+                        <optgroup label="Kia">
+                            <option value="Kia e-Niro 39.2kWh">Kia e-Niro 39.2kWh</option>
+                            <option value="Kia e-Niro 64kWh">Kia e-Niro 64kWh</option>
+                            <option value="Kia e-Soul 39.2kWh">Kia e-Soul 39.2kWh</option>
+                            <option value="Kia e-Soul 64kWh">Kia e-Soul 64kWh</option>
+                        </optgroup>
+                
+                        <optgroup label="Mazda">
+                            <option value="Mazda MX-30">Mazda MX-30</option>
+                        </optgroup>
+                
+                        <optgroup label="Mercedes-Benz">
+                            <option value="Mercedes-Benz EQC">Mercedes-Benz EQC</option>
+                        </optgroup>
+                
+                        <optgroup label="Mini">
+                            <option value="Mini Cooper SE">Mini Cooper SE</option>
+                        </optgroup>
+                
+                        <optgroup label="Nissan">
+                            <option value="Nissan Leaf">Nissan Leaf</option>
+                            <option value="Nissan Leaf e+">Nissan Leaf e+</option>
+                        </optgroup>
+                
+                        <optgroup label="Opel">
+                            <option value="Opel Corsa-e">Opel Corsa-e</option>
+                            <option value="Opel Mokka-e">Opel Mokka-e</option>
+                        </optgroup>
+                
+                        <optgroup label="Peugeot">
+                            <option value="Peugeot e-208">Peugeot e-208</option>
+                            <option value="Peugeot e-2008">Peugeot e-2008</option>
+                        </optgroup>
+                
+                        <optgroup label="Porsche">
+                            <option value="Porsche Taycan 4S (Performance)">Porsche Taycan 4S (Performance)</option>
+                            <option value="Porsche Taycan 4S (Performance Plus)">Porsche Taycan 4S (Performance Plus)</option>
+                            <option value="Porsche Taycan Turbo">Porsche Taycan Turbo</option>
+                            <option value="Porsche Taycan Turbo S">Porsche Taycan Turbo S</option>
+                        </optgroup>
+                
+                        <optgroup label="Renault">
+                            <option value="Renault Zoe R110">Renault Zoe R110</option>
+                            <option value="Renault Zoe R135">Renault Zoe R135</option>
+                        </optgroup>
+                
+                        <optgroup label="Skoda">
+                            <option value="Skoda Citigo-e iV">Skoda Citigo-e iV</option>
+                        </optgroup>
+                
+                        <optgroup label="Smart">
+                            <option value="Smart fortwo EQ">Smart fortwo EQ</option>
+                            <option value="Smart forfour EQ">Smart forfour EQ</option>
+                        </optgroup>
+                
+                        <optgroup label="Tesla">
+                            <option value="Tesla Model 3 Standard Range Plus">Tesla Model 3 Standard Range Plus</option>
+                            <option value="Tesla Model 3 Long Range">Tesla Model 3 Long Range</option>
+                            <option value="Tesla Model 3 Performance">Tesla Model 3 Performance</option>
+                            <option value="Tesla Model S Long Range Plus">Tesla Model S Long Range Plus</option>
+                            <option value="Tesla Model S Performance">Tesla Model S Performance</option>
+                            <option value="Tesla Model X Long Range Plus">Tesla Model X Long Range Plus</option>
+                            <option value="Tesla Model X Performance">Tesla Model X Performance</option>
+                        </optgroup>
+                
+                        <optgroup label="Volkswagen">
+                            <option value="Volkswagen e-up!">Volkswagen e-up!</option>
+                            <option value="Volkswagen ID.3 Pro Performance">Volkswagen ID.3 Pro Performance</option>
+                            <option value="Volkswagen ID.3 Pro S">Volkswagen ID.3 Pro S</option>
+                            <option value="Volkswagen ID.4 1st">Volkswagen ID.4 1st</option>
+                        </optgroup>
+                
+                        <optgroup label="Citroën">
+                            <option value="Citroën ë-Spacetourer (M)">Citroën ë-Spacetourer (M)</option>
+                        </optgroup>
+                
+                        <optgroup label="Mercedes-Benz">
+                            <option value="Mercedes-Benz EQV (long)">Mercedes-Benz EQV (long)</option>
+                        </optgroup>
+                
+                        <optgroup label="Nissan">
+                            <option value="Nissan e-NV200 evalia">Nissan e-NV200 evalia</option>
+                        </optgroup>
+                    </select><br><br>
+
+                    <label for="userInput" class="center">Enter battery Percentage:</label>
+                    <input type="text" id="userInput" name="userInput" required>
+                
+                    </select>
+                    <br><br>
+                    <label for="destination" class="center">Select your source</label>
+                    <select id="source" name="source" class="center">
+                        <option value="Arni">Arni</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Bengaluru">Bengaluru</option>
+                        <option value="Trichy">Trichy</option>
+                    </select><br><br>
+
+                    <label for="destination" class="center">Select your Destination</label>
+                    <select id="destination" name="destination" class="center">
+                        <option value="Pondicherry">Pondicherry</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Bengaluru">Bengaluru</option>
+                        <option value="Trichy">Trichy</option>
+                        <option value="Arni">Arni</option>
+                    </select><br><br>
+
+                    <button type="submit" class="center">Submit</button>
+                </form>
+                
+            </div>
+        {% endif %}
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var batteryPercentageContainer = document.getElementById('batteryPercentageContainer');
+            var form = document.getElementById('chargingForm');
+            var batteryInput = document.getElementById('userInput');
+    
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    updateBatteryPercentage(battery);
+    
+                    battery.addEventListener('levelchange', function() {
+                        updateBatteryPercentage(battery);
+                    });
+                });
+            } else {
+                batteryPercentageContainer.innerHTML = 'Battery status not supported';
+            }
+    
+            function updateBatteryPercentage(battery) {
+                var percentage = Math.floor(battery.level * 100);
+                batteryPercentageContainer.innerHTML = 'Battery Percentage: ' + percentage + '%';
+                batteryInput.value = percentage;  
+            }
+    
+            form.addEventListener('submit', function(event) {
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>

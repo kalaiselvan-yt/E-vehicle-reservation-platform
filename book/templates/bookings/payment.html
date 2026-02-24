@@ -1,0 +1,31 @@
+{% extends "bookings/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <h2 style="text-align:center;color:white;">Pay to confirm your booking</h2>
+    <div class="container" style="width:40%; background-color:skyblue;border-radius:5px;padding:30px;">
+        {% crispy form %}
+        <br>
+        {% if  payment %}
+        <form action="{% url 'book:payment_status' %}" method="POST">
+            {% csrf_token %}
+            <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_zg7C24Itrm23JW"
+                data-amount="{{ payment.amount }}"
+                data-currency="{{ payment.currency }}"
+                data-order_id="{{ payment.id }}"
+                data-buttontext="Pay with Razorpay"
+                data-name="E-vehicle Charging reservation"
+                data-description="This is the platform where you will travel for a long journey, and you need to pre-reserve your charging station here."
+                data-image="https://example.com/your_logo.jpg"
+                data-prefill.name="{{ payment.name }}"
+                data-prefill.email="{{ email }}"
+                data-theme.color="#F37254"
+            ></script>
+            <input type="hidden" custom="Hidden Element" name="hidden"/>
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}
