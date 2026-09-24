@@ -10,10 +10,10 @@ from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from django.conf import settings
 
 def Reserve_List(request):
-    reserve = reservation.objects.all()[0]
+    reserve = reservation.objects.all()[0]  
     reserve_categories = dict(reserve.RESERVATION_CATEGORIES)
     
     reserve_values = reserve_categories.values()
@@ -47,6 +47,7 @@ class CancelBookingView(DeleteView):
     model = Booking
     template_name = 'bookings/booking_cancel_view.html'
     success_url = reverse_lazy('book:Booking_list')
+
 
     def get_object(self, queryset=None):
         try:
@@ -147,7 +148,7 @@ def handlerequest(request):
         Driving_license_number = request.POST.get("Driving_license_number")
 
         # create Razorpay client        
-        client = razorpay.Client(auth=('rzp_test_zg7C24Itrm23JW', 'v3899ux55OZxtQHEGJ9cTbse'))
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
 
         # Create order
         response_payment = client.order.create(dict(amount=amount, currency='INR'))
@@ -173,5 +174,19 @@ def handlerequest(request):
     form = PaymentForm()
     return render(request, "bookings/payment.html", {"form": form})
 
+@csrf_exempt
 def payment_status(request):
-    return render(request,"bookings/payment_status.html")
+    if request.method == "POST":
+        payment_id = request.POST.get('razorpay_payment_id')
+        order_id = request.POST.get('razorpay_order_id')
+        signature = request.POST.get('razorpay_signature')
+
+        print("Payment ID:", payment_id)
+        print("Order ID:", order_id)
+
+        return render(request, "bookings/payment_status.html", {
+            'payment_id': payment_id,
+            'order_id': order_id
+        })
+
+    return render(request, "bookings/payment_status.html")

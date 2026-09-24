@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap4",
 ]
+RAZORPAY_KEY_ID = "rzp_test_zg7C24Itrm23JW"
+RAZORPAY_KEY_SECRET = "v3899ux55OZxtQHEGJ9cTbse"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 

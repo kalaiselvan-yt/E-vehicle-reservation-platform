@@ -9,8 +9,16 @@ class reservation(models.Model):
         ("Level_2", "Normal"),  
         ("Level_3", "Fast"),
     )
+
+    Choices = (
+        ("1","started"),
+        ("2","stoped")
+    )
     charging_Port_number = models.IntegerField()
+    charging_Port_number_2 = models.IntegerField()
     category = models.CharField(max_length=11, choices=RESERVATION_CATEGORIES)
+    category_2 = models.CharField(max_length=5, choices=Choices)
+
 
     def __str__(self):
         return f"  {self.category} with a Port no:{self.charging_Port_number}"

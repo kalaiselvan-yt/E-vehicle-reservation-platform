@@ -58,7 +58,7 @@ def signin(request):
         charge = request.POST.get('userInput')
         Predicted_range = calculate_capacity(vehicle_name, charge)
         
-        df = pd.read_excel("C:\\Users\\kalai\\Desktop\\projects for iv year\\dataset\\FEV data.xlsx")
+        df = pd.read_excel(r"C:\Users\Lenovo\Desktop\final year project\dummy\dataset\FEV data.xls")
 
         # Separate numeric and non-numeric columns
         numeric_cols = df.select_dtypes(include='number').columns
